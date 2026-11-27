@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <title>ALTROXX | Personal AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">✧</div>
+      <div>
+        <h2>ALTROXX</h2>
+        <small>PERSONAL INTELLIGENCE</small>
+      </div>
+      <button class="close-menu" onclick="toggleMenu()">×</button>
+    </div>
+
+    <button class="new-chat" onclick="clearChat()">＋ New conversation</button>
+
+    <p class="nav-label">WORKSPACE</p>
+
+    <nav>
+      <button class="nav-item active" data-page="assistant" onclick="showPage('assistant',this)">⌂ <span>Assistant</span></button>
+      <button class="nav-item" data-page="apps" onclick="showPage('apps',this)">▦ <span>App launcher</span></button>
+      <button class="nav-item" data-page="automation" onclick="showPage('automation',this)">⟳ <span>Automations</span></button>
+      <button class="nav-item" data-page="memory" onclick="showPage('memory',this)">◈ <span>Memory</span></button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="status-card">
+        <span class="green-dot"></span> SYSTEM STATUS
+        <h4>Frontend online</h4>
+        <small>AI services not connected</small>
+      </div>
+      <div class="profile">
+        <div class="avatar">A</div>
+        <div>
+          <b>ALTROXX User</b>
+          <small>Personal workspace</small>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div class="top-left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <span>Workspace /</span>
+        <b id="pageTitle">Assistant</b>
+      </div>
+      <div class="private">◈ Private workspace</div>
+    </header>
+
+    <!-- ASSISTANT PAGE -->
+    <section class="page active" id="assistant">
+
+      <div class="welcome">
+        <small>— YOUR PERSONAL AI</small>
+        <h1>Good evening<span>.</span></h1>
+        <p>Your devices. Your intelligence. One assistant.</p>
+      </div>
+
+      <div class="assistant-panel">
+
+        <div class="panel-header">
+          <span><i></i> ALTROXX IS READY</span>
+          <span class="voice-label">FEMALE VOICE · PLANNED</span>
+        </div>
+
+        <div class="orb-area">
+          <div class="orb">
+            <div class="orb-inner">
+              <div class="wave">〰</div>
+            </div>
+          </div>
+
+          <h3 id="orbStatus">I'm listening whenever you are.</h3>
+          <p>Press the microphone to start a voice session</p>
+        </div>
+
+        <button class="mic-button" id="micButton" onclick="toggleListening()">
+          🎙 <span id="micText">Start talking</span>
+        </button>
+
+        <div class="panel-footer">
+          <span>● Ready for your command</span>
+          <span>ALTROXX v0.1</span>
+        </div>
+
+      </div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Conversation</h2>
+          <p>Talk naturally or type a command.</p>
+        </div>
+        <button onclick="clearChat()">Clear chat</button>
+      </div>
+
+      <div class="chat-box">
+        <div id="messages">
+          <div class="message ai">
+            <b>✧ ALTROXX</b>
+            <p>Hello! I'm ALTROXX, your personal AI assistant. How can I help you?</p>
+          </div>
+        </div>
+
+        <form class="chat-input" onsubmit="sendMessage(event)">
+          <input id="userInput" placeholder="Message ALTROXX or type a command..." autocomplete="off">
+          <button type="submit">↑</button>
+        </form>
+        <div class="chat-note">◈ Actions will require your permission</div>
+      </div>
+
+      <div class="quick-actions">
+        <button onclick="showPage('apps')">▦ <b>Open an app</b></button>
+        <button onclick="showPage('automation')">⟳ <b>Automation</b></button>
+        <button onclick="showPage('memory')">◈ <b>My memory</b></button>
+      </div>
+
+    </section>
+
+    <!-- APP LAUNCHER -->
+    <section class="page" id="apps">
+      <small class="eyebrow">— DEVICE CONTROL</small>
+      <h1>App launcher<span>.</span></h1>
+      <p class="description">Your frequently used applications.</p>
+
+      <input class="search" id="appSearch" placeholder="Search apps..." oninput="filterApps()">
+
+      <div class="app-grid" id="appGrid">
+        <button class="app-card" data-name="YouTube" onclick="appDemo('YouTube')">
+          <div class="app-icon red">▶</div>
+          <b>YouTube</b><small>Media</small>
+        </button>
+        <button class="app-card" data-name="Gmail" onclick="appDemo('Gmail')">
+          <div class="app-icon blue">M</div>
+          <b>Gmail</b><small>Email</small>
+        </button>
+        <button class="app-card" data-name="Maps" onclick="appDemo('Maps')">
+          <div class="app-icon green">⌖</div>
+          <b>Maps</b><small>Navigation</small>
+        </button>
+        <button class="app-card" data-name="Camera" onclick="appDemo('Camera')">
+          <div class="app-icon gray">◉</div>
+          <b>Camera</b><small>Photography</small>
+        </button>
+        <button class="app-card" data-name="WhatsApp" onclick="appDemo('WhatsApp')">
+          <div class="app-icon green">◔</div>
+          <b>WhatsApp</b><small>Messaging</small>
+        </button>
+        <button class="app-card" data-name="Settings" onclick="appDemo('Settings')">
+          <div class="app-icon gray">⚙</div>
+          <b>Settings</b><small>System</small>
+        </button>
+      </div>
+
+      <div class="notice">
+        Android control is not connected yet. These are demonstration buttons.
+      </div>
+    </section>
+
+    <!-- AUTOMATION -->
+    <section class="page" id="automation">
+      <small class="eyebrow">— WORKFLOW CONTROL</small>
+      <h1>Automations<span>.</span></h1>
+      <p class="description">Manage your personal AI workflows.</p>
+
+      <div class="stats">
+        <div><small>WORKFLOWS</small><h2>03</h2></div>
+        <div><small>ACTIVE</small><h2 id="activeCount">02</h2></div>
+        <div><small>ENGINE</small><h2 class="engine">OFFLINE</h2></div>
+      </div>
+
+      <div class="workflow">
+        <div><b>Morning briefing</b><small>Weather, calendar and priorities</small></div>
+        <label class="switch"><input type="checkbox" checked onchange="updateCount()"><span></span></label>
+      </div>
+
+      <div class="workflow">
+        <div><b>YouTube upload checklist</b><small>Daily video preparation reminder</small></div>
+        <label class="switch"><input type="checkbox" checked onchange="updateCount()"><span></span></label>
+      </div>
+
+      <div class="workflow">
+        <div><b>Inbox summary</b><small>Summarise important emails</small></div>
+        <label class="switch"><input type="checkbox" onchange="updateCount()"><span></span></label>
+      </div>
+
+      <div class="notice">n8n integration will be connected in a later development phase.</div>
+    </section>
+
+    <!-- MEMORY -->
+    <section class="page" id="memory">
+      <small class="eyebrow">— PERSONAL CONTEXT</small>
+      <h1>Memory<span>.</span></h1>
+      <p class="description">Things ALTROXX can remember about you.</p>
+
+      <div class="memory-card">
+        <div class="memory-icon">◈</div>
+        <div><b>ALTROXX Memory</b><small>Local demonstration memory</small></div>
+      </div>
+
+      <div class="section-heading">
+        <h2>Saved preferences</h2>
+        <button onclick="addMemory()">＋ Add memory</button>
+      </div>
+
+      <div id="memoryList">
+        <div class="memory-item">✓ My assistant's name is ALTROXX.</div>
+        <div class="memory-item">✓ I prefer voice and chat interaction.</div>
+        <div class="memory-item">✓ I like minimal futuristic design.</div>
+      </div>
+
+      <div class="notice">Memory is currently temporary and stored only in this browser session.</div>
+    </section>
+
+    <footer>ALTROXX · PERSONAL AI <span>FRONTEND v0.1</span></footer>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
